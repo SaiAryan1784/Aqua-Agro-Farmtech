@@ -4,6 +4,7 @@ import {useState, useEffect, createContext} from 'react';
 
 //import data
 import {housesData} from '../data';
+import PropertyDetails from '../pages/PropertyDetails';
 
 //create context
 export const HouseContext = createContext();
@@ -24,9 +25,23 @@ const HouseContextProvider = ({children}) => {
     });
     // remove duplicates
     const uniqueCountries = ['Location (any)', ...new Set(allCountries)]
+    // new Set(allCountries)
 
     //set countries state
     setCountries(uniqueCountries);
+  }, []);
+
+  //return all properties
+  useEffect(()=>{
+    const allProperties = houses.map((house)=>{
+      return house.type;
+    });
+    // remove duplicates
+    const uniqueProperties = ['Location (any)', ...new Set(allProperties)]
+    // new Set(allProperties)
+
+    //set property state
+    setProperties(uniqueProperties);
   }, []);
 
   return (
